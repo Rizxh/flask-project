@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churn Customer Predictor</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; }
+        .form-group { margin-bottom: 10px; }
+        label { display: block; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>CHURN CUSTOMER PREDICTOR</h1>
+    <form method="POST">
+        <div class="form-group">
+            <label for="Tenure">Tenure</label>
+            <input type="number" name="Tenure" min="1" max="61" required>
+        </div>
+        <div class="form-group">
+            <label for="WarehouseToHome">WarehouseToHome</label>
+            <input type="number" name="WarehouseToHome" min="1" max="33" required>
+        </div>
+        <div class="form-group">
+            <label for="NumberOfDeviceRegistered">NumberOfDeviceRegistered</label>
+            <input type="number" name="NumberOfDeviceRegistered" min="1" max="6" required>
+        </div>
+        <div class="form-group">
+            <label for="DaySinceLastOrder">DaySinceLastOrder</label>
+            <input type="number" name="DaySinceLastOrder" min="1" max="30" required>
+        </div>
+        <div class="form-group">
+            <label for="CashbackAmount">CashbackAmount</label>
+            <input type="number" name="CashbackAmount" min="0" max="500" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="NumberOfAddress">NumberOfAddress</label>
+            <input type="number" name="NumberOfAddress" min="1" max="22" required>
+        </div>
+        <div class="form-group">
+            <label for="MaritalStatus">Marital Status</label>
+            <select name="MaritalStatus" required>
+                <option>Single</option>
+                <option>Married</option>
+                <option>Divorced</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Complain">Complain</label>
+            <select name="Complain" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="PreferedOrderCat">Preferred Order Category</label>
+            <select name="PreferedOrderCat" required>
+                <option>Laptop & Accessory</option>
+                <option>Mobile Phone</option>
+                <option>Fashion</option>
+                <option>Grocery</option>
+                <option>Others</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="SatisfactionScore">Satisfaction Score</label>
+            <select name="SatisfactionScore" required>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if result %}
+    <h2>Prediction Result</h2>
+    <p>Result: <strong>{{ result }}</strong></p>
+    <p>Prediction Probability: <strong>{{ probability }}</strong></p>
+    <h3>Customer Features</h3>
+    {{ df_customer|safe }}
+    {% endif %}
+</body>
+</html>

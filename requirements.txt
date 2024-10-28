@@ -1,0 +1,8 @@
+imbalanced-learn
+streamlit
+lightgbm
+xgboost
+pandas
+scikit-learn==1.3.0
+pip
+setuptools
