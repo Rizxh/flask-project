@@ -1,40 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Churn Customer Predictor</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; }
-        .form-group { margin-bottom: 10px; }
-        label { display: block; font-weight: bold; }
+        /* Font dan Warna */
+        body {
+            font-family: "Poppins", sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #4a90e2;
+            text-align: center;
+        }
+
+        /* Formulir */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: flex;
+            flex-direction: column;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="number"],
+        select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        /* Tombol */
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4a90e2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #357abd;
+        }
+
+        /* Hasil Prediksi */
+        h2 {
+            color: #333;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* Tabel Fitur Customer */
+        table {
+            margin-top: 15px;
+            border-collapse: collapse;
+            font-size: 14px;
+            color: #444;
+            background-color: #fff;
+            border-radius: 5px;
+            overflow-x: scroll;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tableCover {
+            overflow-x: scroll;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f4f8;
+            font-weight: 600;
+            color: #555;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fbfc;
+        }
     </style>
 </head>
+
 <body>
-    <h1>CHURN CUSTOMER PREDICTOR</h1>
+    <h1>Churn Customer Predictor</h1>
     <form method="POST">
         <div class="form-group">
             <label for="Tenure">Tenure</label>
             <input type="number" name="Tenure" min="1" max="61" required>
         </div>
         <div class="form-group">
-            <label for="WarehouseToHome">WarehouseToHome</label>
+            <label for="WarehouseToHome">Warehouse to Home Distance</label>
             <input type="number" name="WarehouseToHome" min="1" max="33" required>
         </div>
         <div class="form-group">
-            <label for="NumberOfDeviceRegistered">NumberOfDeviceRegistered</label>
+            <label for="NumberOfDeviceRegistered">Number of Devices Registered</label>
             <input type="number" name="NumberOfDeviceRegistered" min="1" max="6" required>
         </div>
         <div class="form-group">
-            <label for="DaySinceLastOrder">DaySinceLastOrder</label>
+            <label for="DaySinceLastOrder">Days Since Last Order</label>
             <input type="number" name="DaySinceLastOrder" min="1" max="30" required>
         </div>
         <div class="form-group">
-            <label for="CashbackAmount">CashbackAmount</label>
+            <label for="CashbackAmount">Cashback Amount</label>
             <input type="number" name="CashbackAmount" min="0" max="500" step="0.01" required>
         </div>
         <div class="form-group">
-            <label for="NumberOfAddress">NumberOfAddress</label>
+            <label for="NumberOfAddress">Number of Addresses</label>
             <input type="number" name="NumberOfAddress" min="1" max="22" required>
         </div>
         <div class="form-group">
@@ -76,11 +174,16 @@
     </form>
 
     {% if result %}
-    <h2>Prediction Result</h2>
-    <p>Result: <strong>{{ result }}</strong></p>
-    <p>Prediction Probability: <strong>{{ probability }}</strong></p>
-    <h3>Customer Features</h3>
-    {{ df_customer|safe }}
+        <h2>Prediction Result</h2>
+        <p>Result: <strong>{{ result }}</strong></p>
+        <p>Prediction Probability: <strong>{{ probability }}</strong></p>
+        <h3>Customer Features</h3>
+    <div class="tableCover"">
+        <table>
+            {{ df_customer|safe }}
+        </table>
+    </div>  
     {% endif %}
 </body>
+
 </html>
