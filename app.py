@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 
 # Load the pre-trained model
-model_loaded = pickle.load(open('final_model.sav', 'rb'))
+model_loaded = pickle.load(open('final_tuned_model_LightGBM.sav', 'rb'))
 
 # Initialize Flask app
 app = Flask(__name__)
